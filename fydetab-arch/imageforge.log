@@ -1,0 +1,15 @@
+06:21:42 INFO: Copying files to /tmp/work/aarch64
+06:21:42 INFO: Install dir is:/tmp/work/aarch64
+06:24:55 INFO: Pacstrap complete
+06:24:55 INFO: Copying skel to arch
+06:24:55 INFO: Partitioning Fydetab Image
+06:24:56 INFO: Creating image file ArchLinux-ARM-FydeTab-Duo-Plasma-2024-08-24.img
+06:25:00 INFO: Attaching image file ArchLinux-ARM-FydeTab-Duo-Plasma-2024-08-24.img to loop device /dev/loop0
+06:25:00 INFO: Image file created
+06:25:01 INFO: Full command: ['parted', '--script', '/dev/loop0', '--align', 'optimal', 'mkpart', 'primary', 'fat32', '9M', '384M', 'set', '2', 'boot', 'on', 'mkpart', 'primary', 'btrfs', '384M', '100%']
+06:25:03 INFO: Partitioned successfully
+06:25:03 INFO: Copying files to /tmp/work/mnt
+06:26:23 INFO: Unmounting!
+06:26:25 INFO: Compressing ArchLinux-ARM-FydeTab-Duo-Plasma-2024-08-24.img
+06:27:40 INFO: Compressed ArchLinux-ARM-FydeTab-Duo-Plasma-2024-08-24.img
+06:27:40 INFO: Time taken: 5.974270129203797 minutes
