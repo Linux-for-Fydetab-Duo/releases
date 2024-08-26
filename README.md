@@ -1,6 +1,6 @@
 # Images
 
-This directory contains files needed to build each image for the FydeTab Duo
+This repository contains files needed to build each image for the FydeTab Duo
 
 Currently, the following images are available:
 
