@@ -28,6 +28,8 @@ partition_prefix = lambda config_dir, disk: [
     ["partprobe", disk],
     ["sgdisk", "-e", disk],
     ["partprobe", disk],
+    ['sleep', '1'],
+    ["kpartx", "-a", disk],
 ]
 
 partition_suffix = lambda config_dir, disk: [

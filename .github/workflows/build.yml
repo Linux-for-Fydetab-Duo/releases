@@ -26,7 +26,7 @@ jobs:
           init-docker
           sudo pacman -Sy --noconfirm --needed \
           python parted btrfs-progs \
-          git wget arch-install-scripts unzip gptfdisk dosfstools
+          git wget arch-install-scripts unzip gptfdisk dosfstools multipath-tools
           wget https://fyde.panda-sa.ma/repo/fyde/aarch64/python-imageforge-0.0.1-1-any.pkg.tar.zst
           sudo pacman -U --noconfirm python-imageforge-0.0.1-1-any.pkg.tar.zst
 
@@ -35,13 +35,6 @@ jobs:
           sudo umount -R ./work/aarch64/* || true
           sudo rm -rf /var/lib/pacman/db.lck ./out ./work
           sudo python ./images/fydetab-arch/profiledef -c ./images/fydetab-arch/ -w ./work -o ./out
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.image }}
-          path: out/*.img.xz
-          retention-days: 7
 
       - name: Cleanup
         if: always()
