@@ -23,6 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          init-docker
           sudo pacman -Sy --noconfirm --needed \
           python parted btrfs-progs \
           git wget arch-install-scripts unzip
