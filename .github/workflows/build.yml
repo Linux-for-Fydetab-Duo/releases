@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, ARM64]
+    runs-on: ubuntu-latest
     container: 
         image: bredos/bredos:latest
         ports:
@@ -16,6 +16,9 @@ jobs:
         options: --privileged
 
     steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Checkout Images
         uses: actions/checkout@v4
         with:
@@ -26,7 +29,8 @@ jobs:
           init-docker
           sudo pacman -Sy --noconfirm --needed \
           python parted btrfs-progs \
-          git wget arch-install-scripts unzip gptfdisk dosfstools multipath-tools
+          git wget arch-install-scripts \
+          unzip gptfdisk dosfstools multipath-tools
           wget https://fyde.panda-sa.ma/repo/fyde/aarch64/python-imageforge-0.0.1-1-any.pkg.tar.zst
           sudo pacman -U --noconfirm python-imageforge-0.0.1-1-any.pkg.tar.zst
 
