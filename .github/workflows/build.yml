@@ -1,0 +1,68 @@
+name: Build Images
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: [self-hosted, ARM64]
+    container: 
+        image: bredos/bredos:latest
+        ports:
+          - 80
+        options: --privileged
+
+    steps:
+      - name: Checkout Images
+        uses: actions/checkout@v4
+        with:
+          path: images
+
+      - name: Install dependencies
+        run: |
+          sudo pacman -Sy --noconfirm --needed \
+          python parted btrfs-progs \
+          git wget arch-install-scripts unzip
+          wget https://fyde.panda-sa.ma/repo/fyde/aarch64/python-imageforge-0.0.1-1-any.pkg.tar.zst
+          sudo pacman -U --noconfirm python-imageforge-0.0.1-1-any.pkg.tar.zst
+
+      - name: Build Image
+        run: |
+          sudo umount -R ./work/aarch64/* || true
+          sudo rm -rf /var/lib/pacman/db.lck ./out ./work
+          sudo python ./images/fydetab-arch/profiledef -c ./images/fydetab-arch/ -w ./work -o ./out
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.image }}
+          path: out/*.img.xz
+          retention-days: 7
+
+      - name: Cleanup
+        if: always()
+        run: |
+          sudo umount -R ./work/aarch64/* || true
+          sudo rm -rf ./work ./out
+        
+      - name: Set current date as tag name
+        id: set_tag_name
+        run: echo "TAG_NAME=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+  
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+              ./out/*.img.xz
+          tag_name: ${{ env.TAG_NAME }}
+          draft: true
+          prerelease: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clean up
+        run: |
+          rm ./out/ -rf
