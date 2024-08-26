@@ -35,7 +35,7 @@ jobs:
         if: always()
         run: |
           sudo umount -R ./work/aarch64/* || true
-          sudo rm -rf ./work ./out
+          sudo rm -rf ./work
         
       - name: Set current date as tag name
         id: set_tag_name
