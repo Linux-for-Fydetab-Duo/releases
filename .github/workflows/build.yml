@@ -8,16 +8,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container: 
-        image: bredos/bredos:latest
-        ports:
-          - 80
-        options: --privileged
-
+    runs-on: [self-hosted, ARM64]
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
 
       - name: Checkout Images
         uses: actions/checkout@v4
@@ -26,7 +18,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          init-docker
           sudo pacman -Sy --noconfirm --needed \
           python parted btrfs-progs \
           git wget arch-install-scripts \
