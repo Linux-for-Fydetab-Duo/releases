@@ -29,7 +29,7 @@ partition_prefix = lambda config_dir, disk: [
     ["sgdisk", "-e", disk],
     ["partprobe", disk],
     ['sleep', '1'],
-    ["kpartx", "-a", disk],
+    ['lsblk'],
 ]
 
 partition_suffix = lambda config_dir, disk: [
