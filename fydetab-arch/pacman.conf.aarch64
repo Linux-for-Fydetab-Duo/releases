@@ -29,12 +29,12 @@ Color
 CheckSpace
 # VerbosePkgLists
 ParallelDownloads = 5
-SigLevel = Required DatabaseOptional
+SigLevel = Never
 LocalFileSigLevel = Optional
 # RemoteFileSigLevel = Required
 
 [fyde]
-Include = /etc/pacman.d/fyde-mirrorlist
+Server = https://fyde.panda-sa.ma/repo/$repo/$arch
 
 [core]
 Server = http://dk.mirror.archlinuxarm.org/$arch/$repo
