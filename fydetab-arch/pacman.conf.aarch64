@@ -26,7 +26,7 @@ Architecture = aarch64
 # UseSyslog
 Color
 # NoProgressBar
-CheckSpace
+# CheckSpace
 # VerbosePkgLists
 ParallelDownloads = 5
 SigLevel = Never
