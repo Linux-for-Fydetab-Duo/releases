@@ -36,6 +36,9 @@ LocalFileSigLevel = Optional
 [fyde]
 Server = https://fyde.panda-sa.ma/repo/$repo/$arch
 
+[7Ji]
+Server = https://github.com/7Ji/archrepo/releases/download/$arch
+
 [core]
 Server = http://dk.mirror.archlinuxarm.org/$arch/$repo
 

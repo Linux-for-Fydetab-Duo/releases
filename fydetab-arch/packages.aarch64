@@ -37,7 +37,9 @@ fyde-keyring
 fyde-mirrorlist
 dosfstools
 e2fsprogs
-firefox
+#firefox
+chromium-mpp
+ffmpeg-mpp-git
 neofetch
 mali-G610-firmware-rkr4
 blueman
@@ -47,6 +49,7 @@ lshw
 expect
 ap6275p-firmware
 gnu-netcat
+7ji-keyring
 
 # ===
 # GUI
