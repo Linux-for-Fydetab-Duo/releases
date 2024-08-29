@@ -4,7 +4,7 @@ from time import strftime, time
 import subprocess
 
 img_version = strftime("%Y-%m-%d")
-edition = "Plasma"
+edition = "Gnome"
 arch = "aarch64"
 img_name = f"ArchLinux-ARM-FydeTab-Duo-{edition}-{img_version}"
 install_dir = "arch"
