@@ -37,8 +37,8 @@ fyde-keyring
 fyde-mirrorlist
 dosfstools
 e2fsprogs
-#firefox
-chromium-mpp
+firefox
+#chromium-mpp
 ffmpeg-mpp-git
 neofetch
 mali-G610-firmware-rkr4
