@@ -3,4 +3,3 @@
 #
 # Syntax: simple "KEY=VAL" pairs on separate lines
 #
-PAN_MESA_DEBUG=gofaster
