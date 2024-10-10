@@ -49,7 +49,7 @@ jobs:
           files: |
               ./out/*.img.xz
           tag_name: ${{ env.TAG_NAME }}
-          draft: true
+          draft: false
           prerelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
