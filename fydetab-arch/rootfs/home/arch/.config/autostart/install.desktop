@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0.1
+Name=Setup Arch Linux
+GenericName=Calamares Installer
+Exec=sudo -E /usr/bin/calamares -d | sudo tee /var/log/calamares.log
+Comment=Calamares — Installer for Arch Linux for the Fydetab Duo
+Keywords=calamares;system;install;installer
+Terminal=false
+Categories=Qt;System;
+StartupWMClass=calamares
+StartupNotify=True
