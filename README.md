@@ -1,3 +1,5 @@
+[![Latest GitHub Release](https://img.shields.io/github/release/Linux-for-Fydetab-Duo/releases.svg?label=Latest%20Release)](https://github.com/Linux-for-Fydetab-Duo/releases/releases/latest)
+[![Total GitHub Downloads](https://img.shields.io/github/downloads/Linux-for-Fydetab-Duo/releases/total.svg?&color=E95420&label=Total%20Downloads)](https://github.com/Linux-for-Fydetab-Duo/releases/releases)
 # Images
 
 This repository contains files needed to build each image for the FydeTab Duo
