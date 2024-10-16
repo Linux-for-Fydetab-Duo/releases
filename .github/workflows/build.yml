@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, ARM64]
+    runs-on: [self-hosted, arch]
     steps:
 
       - name: Checkout Images
