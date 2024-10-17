@@ -44,14 +44,33 @@ jobs:
   
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-              ./out/*.img.xz
-          tag_name: ${{ env.TAG_NAME }}
-          draft: false
-          prerelease: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Create a new release
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "tag_name": "${{ env.TAG_NAME }}",
+              "target_commitish": "main",
+              "name": "${{ env.TAG_NAME }}",
+              "body": "Release description",
+              "draft": false,
+              "prerelease": true
+            }' \
+            https://api.github.com/repos/${{ github.repository }}/releases \
+            | tee release_response.json
+      
+          # Extract the release ID
+          RELEASE_ID=$(jq -r '.id' release_response.json)
+      
+          for file in ./out/*.img.xz; do
+            curl -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/octet-stream" \
+              -T "$file" \
+              "https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=$(basename "$file")"
+          done
+
 
       - name: Clean up
         run: |
