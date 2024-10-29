@@ -34,7 +34,7 @@ LocalFileSigLevel = Optional
 # RemoteFileSigLevel = Required
 
 [fyde]
-Server = https://fyde.panda-sa.ma/repo/$repo/$arch
+Server = https://deb-mirror.fydeos.com/pacman/repo/$repo/$arch
 
 [7Ji]
 Server = https://github.com/7Ji/archrepo/releases/download/$arch
