@@ -21,7 +21,7 @@ jobs:
           python parted btrfs-progs \
           git wget arch-install-scripts \
           unzip gptfdisk dosfstools multipath-tools jq
-          wget https://fyde.panda-sa.ma/repo/fyde/aarch64/python-imageforge-0.0.1-1-any.pkg.tar.zst
+          wget https://deb-mirror.fydeos.com/pacman/repo/fyde/aarch64/python-imageforge-0.0.1-1-any.pkg.tar.zst
           sudo pacman -U --noconfirm python-imageforge-0.0.1-1-any.pkg.tar.zst
 
       - name: Build Image
