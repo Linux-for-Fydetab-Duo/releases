@@ -1,0 +1,92 @@
+#! /usr/bin/env python
+
+from time import strftime, time
+import subprocess
+
+img_version = strftime("%Y-%m-%d")
+base="debian"
+suite="bookworm"
+mirror="http://deb.debian.org/debian"
+components = [
+    "main",
+    "contrib",
+    "non-free",
+]
+edition = "Gnome"
+arch = "arm64"
+img_name = f"Debian-FydeTab-Duo-{edition}-{img_version}"
+install_dir = "arch"
+fs = "btrfs"
+img_type = "image"
+img_backend = "loop"
+has_uefi = True
+
+cmdline = "console=ttyFIQ0,1500000n8 console=tty1 console=both loglevel=7 rw panic=10 init=/sbin/init rootflags=subvol=@ rootfstype=btrfs"
+grubcmdl = "console=ttyFIQ0,1500000n8 console=tty1 console=both rw init=/sbin/init"
+grubdtb = "../usr/lib/firmware/6.1.0-1023-rockchip/device-tree/rockchip/rk3588s-fydetab-duo.dtb"
+
+partition_table = lambda img_size, fs: {
+    "UEFI": ["0%", "8M", "8M", "NONE"],
+    "boot": ["9M", "32M", "24M", "fat32"],
+    "primary": ["32M", "100%", str(int(img_size / 1000) - 32) + "M", fs],
+}
+
+partition_prefix = lambda config_dir, disk: [
+    ["dd", "if=" + config_dir + "/fydetab-duo_UEFI.img", "of=" + disk, "bs=512"],
+    ["partprobe", disk],
+    ["sgdisk", "-e", disk],
+    ["partprobe", disk],
+    ['sleep', '1'],
+    ['lsblk'],
+]
+
+partition_suffix = lambda config_dir, disk: [
+    ["mkfs.fat", "-v", "-F12", "-n", "BOOT", disk + "p2"],
+]
+
+perms = {
+    "/etc/": ["0", "0", "755"],
+    "/usr/bin/resizefs": ["0", "0", "755"],
+    "/usr/bin/zswap-arm-ctrl": ["0", "0", "755"],
+    "/usr/bin/pacman-init": ["0", "0", "755"],
+    "/usr/bin/oemcleanup": ["0", "0", "755"],
+    "/etc/polkit-1/rules.d": ["0", "0", "750"],
+    "/etc/sudoers.d": ["0", "0", "750"],
+    "/usr/lib": ["0", "0", "755"],
+    "/usr/bin": ["0", "0", "755"],
+    "/usr": ["0", "0", "755"],
+    "/usr/lib/systemd": ["0", "0", "755"],
+    "/home/debian/": ["1001", "1001", "750"],
+    "/home": ["0", "0", "755"],
+}
+
+def main() -> None:
+    debstrap_packages()
+    copyfiles(cfg["config_dir"] + "/rootfs", cfg["install_dir"])
+    remove_machine_id()
+    fixperms()
+    copy_skel_to_users()
+    logging.info("Partitioning Fydetab Image")
+    rootfs_size = get_size(cfg["install_dir"]) + 1100000
+    print("Rootfs size: " + str(rootfs_size))
+    ldev = next_loop()
+    makeimg(rootfs_size, ldev)
+    partition(ldev, rootfs_size)
+    os.makedirs(cfg["mnt_dir"] + "/boot/efi", exist_ok=True)
+    subprocess.run("mount " + ldev + "p2 " + cfg["mnt_dir"] + "/boot/efi", shell=True)
+    copyfiles(cfg["install_dir"], cfg["mnt_dir"], retainperms=True)
+    create_fstab(ldev)
+    grub_install()
+    unmount(ldev)
+    compressimage(cfg["img_name"])
+    cleanup()
+
+if __name__ == "__main__":
+    start = time()
+    from imageforge.config import Config
+    Config(globals())
+    from imageforge.common import *
+    from imageforge.partitioning import *
+    from imageforge.packages import *
+    main()
+    logging.info("Time taken: " + str((time() - start) / 60) + " minutes")

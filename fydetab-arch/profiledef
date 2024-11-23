@@ -19,8 +19,8 @@ grubdtb = "dtbs/rockchip/rk3588s-fydetab-duo.dtb"
 
 partition_table = lambda img_size, fs: {
     "UEFI": ["0%", "8M", "8M", "NONE"],
-    "boot": ["9M", "384M", "376M", "fat32"],
-    "primary": ["384M", "100%", str(int(img_size / 1000) - 416) + "M", fs],
+    "boot": ["9M", "32M", "24M", "fat32"],
+    "primary": ["32M", "100%", str(int(img_size / 1000) - 32) + "M", fs],
 }
 
 partition_prefix = lambda config_dir, disk: [
@@ -33,7 +33,7 @@ partition_prefix = lambda config_dir, disk: [
 ]
 
 partition_suffix = lambda config_dir, disk: [
-    ["mkfs.fat", "-v", "-F32", "-n", "BOOT", disk + "p2"],
+    ["mkfs.fat", "-v", "-F12", "-n", "BOOT", disk + "p2"],
 ]
 
 perms = {
@@ -64,7 +64,8 @@ def main() -> None:
     ldev = next_loop()
     makeimg(rootfs_size, ldev)
     partition(ldev, rootfs_size)
-    subprocess.run("mount " + ldev + "p2 " + cfg["mnt_dir"] + "/boot", shell=True)
+    os.makedirs(cfg["mnt_dir"] + "/boot/efi", exist_ok=True)
+    subprocess.run("mount " + ldev + "p2 " + cfg["mnt_dir"] + "/boot/efi", shell=True)
     copyfiles(cfg["install_dir"], cfg["mnt_dir"], retainperms=True)
     create_fstab(ldev)
     grub_install()
