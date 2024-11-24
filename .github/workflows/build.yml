@@ -21,22 +21,27 @@ jobs:
           python parted btrfs-progs \
           git wget arch-install-scripts \
           unzip gptfdisk dosfstools multipath-tools jq
+          yay -S --noconfirm --needed \
+          mmdebstrap debian-archive-keyring
           wget https://deb-mirror.fydeos.com/pacman/repo/fyde/aarch64/python-imageforge-1.1.0-1-any.pkg.tar.zst
           sudo pacman -U --noconfirm python-imageforge-1.1.0-1-any.pkg.tar.zst
 
       - name: Build Image
         run: |
           sudo umount -R ./work/aarch64/* || true
-          sudo rm -rf /var/lib/pacman/db.lck ./out ./work
+          sudo rm -rf /var/lib/pacman/db.lck ./out ./work ./work-deb
           for i in {1..3}; do
             sudo python ./images/fydetab-arch/profiledef -c ./images/fydetab-arch/ -w ./work -o ./out && break
+          done
+          for i in {1..3}; do
+            sudo python ./images/fydetab-debian/profiledef -c ./images/fydetab-debian/ -w ./work-deb -o ./out && break
           done
 
       - name: Cleanup
         if: always()
         run: |
           sudo umount -R ./work/aarch64/* || true
-          sudo rm -rf ./work
+          sudo rm -rf ./work ./work-deb
         
       - name: Set current date as tag name
         id: set_tag_name

@@ -13,6 +13,8 @@ Currently, the following images are available:
 - [ImageForge](https://github.com/Linux-for-Fydetab-Duo/imageforge)
 - archlinux-install-scripts
 - Root access
+- mmdebstrap (for Debian images)
+- debian-archive-keyring (for Debian images)
 
 ## Instructions
 
@@ -26,4 +28,4 @@ sudo profiledef -c /path/to/image -w /path/to/workdir -o /path/to/output-dir
 
 ## Credits 
 
-- [7Ji](https://github.com/7Ji/archrepo) for VPU acceleration in chromium and ffmpeg
+- [7Ji](https://github.com/7Ji/archrepo) for VPU acceleration in chromium and ffmpeg (Arch Linux)
