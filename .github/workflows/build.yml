@@ -23,7 +23,7 @@ jobs:
           unzip gptfdisk dosfstools multipath-tools jq
           yay -S --noconfirm --needed pod2man
           yay -S --noconfirm --needed \
-          mmdebstrap debian-archive-keyring
+          mmdebstrap debian-archive-keyring arch-test-bin
           wget https://deb-mirror.fydeos.com/pacman/repo/fyde/aarch64/python-imageforge-1.1.0-1-any.pkg.tar.zst
           sudo pacman -U --noconfirm python-imageforge-1.1.0-1-any.pkg.tar.zst
 
