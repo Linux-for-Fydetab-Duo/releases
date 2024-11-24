@@ -32,3 +32,4 @@ run_in_chroot "update-locale LANG=en_US.UTF-8"
 
 run_in_chroot "apt clean"
 run_in_chroot "apt autoclean"
+run_in_chroot "systemctl enable resizefs"

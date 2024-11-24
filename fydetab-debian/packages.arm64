@@ -22,6 +22,7 @@ wireplumber
 pipewire-alsa
 pipewire-jack
 apt
+kgx
 base-files
 base-passwd
 adduser
@@ -39,4 +40,5 @@ gdm3
 zstd
 network-manager
 network-manager-gnome
+systemctl-timesyncd
 firefox-esr
