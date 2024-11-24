@@ -7,6 +7,7 @@ This repository contains files needed to build each image for the FydeTab Duo
 Currently, the following images are available:
 
 - Arch Linux
+- Debian 12 (Bookworm)
 
 ## Prerequisites
 
