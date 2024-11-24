@@ -19,8 +19,9 @@ jobs:
         run: |
           sudo pacman -Sy --noconfirm --needed \
           python parted btrfs-progs \
-          git wget arch-install-scripts \
+          git wget arch-install-scripts perl \
           unzip gptfdisk dosfstools multipath-tools jq
+          yay -S --noconfirm --needed pod2man
           yay -S --noconfirm --needed \
           mmdebstrap debian-archive-keyring
           wget https://deb-mirror.fydeos.com/pacman/repo/fyde/aarch64/python-imageforge-1.1.0-1-any.pkg.tar.zst
