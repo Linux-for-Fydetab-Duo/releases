@@ -40,5 +40,4 @@ gdm3
 zstd
 network-manager
 network-manager-gnome
-systemctl-timesyncd
 firefox-esr
