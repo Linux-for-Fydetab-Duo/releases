@@ -63,11 +63,11 @@ jobs:
           chmod 600 /tmp/key
           for i in $(ls ./out/Debian*.img.xz); do
             echo "Uploading $i"
-            scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/key $i $HOST:/home/fydeadmin/download.fydeos.io/fydetabduo/other_os/
+            rsync -Pavhl -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/key" $i $HOST:/home/fydeadmin/download.fydeos.io/fydetabduo/other_os/
           done
           for i in $(ls ./out/Arch*.img.xz); do
             echo "Uploading $i"
-            scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/key $i $HOST:/home/fydeadmin/download.fydeos.io/fydetabduo/other_os/
+            rsync -Pavhl -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/key" $i $HOST:/home/fydeadmin/download.fydeos.io/fydetabduo/other_os/
           done
           rm /tmp/key
   
