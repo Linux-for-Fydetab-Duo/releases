@@ -39,7 +39,7 @@ dosfstools
 e2fsprogs
 firefox
 #chromium-mpp
-ffmpeg-mpp-git
+# ffmpeg-mpp-git
 neofetch
 mali-G610-firmware-rkr4
 blueman
