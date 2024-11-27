@@ -49,7 +49,6 @@ lshw
 expect
 ap6275p-firmware
 gnu-netcat
-7ji-keyring
 
 # ===
 # GUI
