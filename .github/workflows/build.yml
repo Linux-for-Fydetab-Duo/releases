@@ -63,11 +63,11 @@ jobs:
           chmod 600 /tmp/key
           for i in $(ls ./out/Debian*.img.xz); do
             echo "Uploading $i"
-            rsync -Pavhl -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/key" $i $HOST:/home/fydeadmin/download.fydeos.io/fydetabduo/other_os/debian/
+            rsync -Pavhl -e "ssh -i /tmp/key" $i $HOST:/home/fydeadmin/download.fydeos.io/fydetabduo/other_os/debian/
           done
           for i in $(ls ./out/Arch*.img.xz); do
             echo "Uploading $i"
-            rsync -Pavhl -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/key" $i $HOST:/home/fydeadmin/download.fydeos.io/fydetabduo/other_os/archlinux/
+            rsync -Pavhl -e "ssh -i /tmp/key" $i $HOST:/home/fydeadmin/download.fydeos.io/fydetabduo/other_os/archlinux/
           done
           rm /tmp/key
   
@@ -81,16 +81,16 @@ jobs:
           RELEASE_BODY=""
           for i in $(ls ./out/Debian*.img.xz); do
             FILENAME=$(basename $i)
-            URL="https://download.fydeos.io/fydetabduo/other_os/debian/$FILENAME"
+            URL="https://download2.fydeos.io/fydetabduo/other_os/debian/$FILENAME"
             SHA256=$(sha256sum $i | awk '{ print $1 }')
-            RELEASE_BODY+="\n$FILENAME: $URL\nsha256 for $FILENAME:\n\`\`\`\n$SHA256\n\`\`\`\n"
+            RELEASE_BODY+="\n## $FILENAME\n$URL\n### sha256:\n$FILENAME: \`$SHA256\`\n"
           done
 
           for i in $(ls ./out/Arch*.img.xz); do
             FILENAME=$(basename $i)
-            URL="https://download.fydeos.io/fydetabduo/other_os/archlinux/$FILENAME"
+            URL="https://download2.fydeos.io/fydetabduo/other_os/archlinux/$FILENAME"
             SHA256=$(sha256sum $i | awk '{ print $1 }')
-            RELEASE_BODY+="\n$FILENAME: $URL\nsha256 for $FILENAME:\n\`\`\`\n$SHA256\n\`\`\`\n"
+            RELEASE_BODY+="\n## $FILENAME\n$URL\n### sha256:\n$FILENAME: \`$SHA256\`\n"
           done
 
           RELEASE_RESPONSE=$(curl -s -X POST \
