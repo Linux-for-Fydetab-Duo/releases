@@ -24,6 +24,10 @@ jobs:
           yay -S --noconfirm --needed pod2man
           yay -S --noconfirm --needed \
           mmdebstrap debian-archive-keyring arch-test-bin
+          # Check if imageforge directory exists and remove it
+          if [ -d "imageforge" ]; then
+            sudo rm -rf imageforge
+          fi
           git clone https://github.com/Linux-for-Fydetab-Duo/imageforge
           cd imageforge/ 
           pre-commit install
