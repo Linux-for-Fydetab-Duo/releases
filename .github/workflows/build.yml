@@ -24,8 +24,10 @@ jobs:
           yay -S --noconfirm --needed pod2man
           yay -S --noconfirm --needed \
           mmdebstrap debian-archive-keyring arch-test-bin
-          wget https://deb-mirror.fydeos.com/pacman/repo/fyde/aarch64/python-imageforge-1.1.0-2-any.pkg.tar.zst
-          sudo pacman -U --noconfirm python-imageforge-1.1.0-2-any.pkg.tar.zst
+          git clone https://github.com/Linux-for-Fydetab-Duo/imageforge
+          cd imageforge/ 
+          pre-commit install
+          makepkg -si
 
       - name: Build Arch Image
         run: |
