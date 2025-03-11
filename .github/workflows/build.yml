@@ -19,7 +19,7 @@ jobs:
         run: |
           sudo pacman -Sy --noconfirm --needed \
           python parted btrfs-progs \
-          git wget arch-install-scripts perl \
+          git wget arch-install-scripts perl pre-commit  \
           unzip gptfdisk dosfstools multipath-tools jq
           yay -S --noconfirm --needed pod2man
           yay -S --noconfirm --needed \
