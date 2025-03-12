@@ -38,7 +38,8 @@ LocalFileSigLevel = Optional
 Server = https://deb-mirror.fydeos.com/pacman/repo/$repo/$arch
 
 #[7Ji]
-#Server = https://github.com/7Ji/archrepo/releases/download/$arch
+SigLevel = Never
+Server = https://github.com/7Ji/archrepo/releases/download/$arch
 
 [core]
 Server = http://dk.mirror.archlinuxarm.org/$arch/$repo
