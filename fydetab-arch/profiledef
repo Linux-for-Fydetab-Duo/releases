@@ -62,7 +62,7 @@ def main() -> None:
     fixperms()
     copy_skel_to_users()
     subprocess.run(["cp", "-f", cfg["config_dir"] + "/uboot/boot.scr.uimg", cfg["install_dir"]+"/boot/"])
-    subprocess.run(["cp", "-f", cfg["config_dir"] + "/uboot/rk3588s-fydetab-duo.dtb", cfg["install_dir"]+"/boot/dtbs/rockchip/"])
+    #subprocess.run(["cp", "-f", cfg["config_dir"] + "/uboot/rk3588s-fydetab-duo.dtb", cfg["install_dir"]+"/boot/dtbs/rockchip/"])
     logging.info("Partitioning Fydetab Image")
     rootfs_size = get_size(cfg["install_dir"]) + 1048576 # df size + 1GB
     ldev = next_loop()

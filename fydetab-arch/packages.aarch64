@@ -19,7 +19,8 @@ polkit
 bluez-utils
 #linux-fydetab
 #linux-fydetab-headers
-mesa-panfork-git
+# mesa-panfork-git
+mesa
 libdrm
 linux-firmware
 linux-firmware-whence
@@ -87,7 +88,7 @@ gnome-weather
 gnome-tweaks
 geary
 gnome-notes
-cheese
+#cheese
 seahorse
 vlc
 noto-fonts-cjk
